@@ -55,6 +55,8 @@ SCHEMA_DOC = """## 数据库：sales（电商订单分析库，近一年数据�
 ### 常用口径速查
 - 销售额/GMV = SUM(orders.amount) WHERE status='已完成'
 - 客单价 = AVG(orders.amount)（同上只算已完成）
+- **订单量 = 订单笔数 COUNT(*)；销量 = 售出件数 SUM(quantity)**——两个词严格区分，禁止互换
+- **"最近N天" = 过去 N 个完整自然日，不含今天**：`order_date >= CURRENT_DATE - INTERVAL N DAY AND order_date < CURRENT_DATE`；"上个月"=上个完整自然月
 - 复购用户 = 按 user_id 分组 HAVING COUNT(*)>1
 - 毛利 = SUM(o.amount - p.cost_price * o.quantity)（join 后）
 - **用户数/人数 = COUNT(DISTINCT user_id)**——join 后每用户多行，直接 COUNT 会算成订单数

@@ -21,7 +21,8 @@ SYSTEM_TEMPLATE = """你是 DuckDB 的 SQL 专家。今天是 {today}。
 2. 业绩统计（销售额/GMV/客单价/销量）只算 status='已完成' 的订单
 3. "上个月/最近N天/今年"等相对时间，用 CURRENT_DATE 算出明确日期边界放进 WHERE
 4. TopN 类问题用 ORDER BY ... DESC + LIMIT
-5. 只输出一条 SQL，放在 ```sql 代码块中，不要任何解释
+5. 问题与数据库分析无关（闲聊/写作/算术/转账/天气等）时，不生成任何 SQL，直接回复："这超出我能查询的数据范围"
+6. 只输出一条 SQL，放在 ```sql 代码块中，不要任何解释
 
 ## 示例
 
@@ -46,6 +47,16 @@ WHERE o.status = '已完成'
 GROUP BY 1, 2, 3
 ORDER BY sales DESC
 LIMIT 5;
+```
+
+问：最近30天的总订单量和总销量是多少？
+```sql
+SELECT COUNT(*) AS order_count,
+       SUM(quantity) AS quantity_sold
+FROM orders
+WHERE status = '已完成'
+  AND order_date >= CURRENT_DATE - INTERVAL 30 DAY
+  AND order_date < CURRENT_DATE;
 ```"""
 
 

@@ -1,0 +1,255 @@
+{"id": "E002", "type": "scalar", "question": "全部时间的总销售额是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.1, "verdict": "pass"}
+{"id": "E004", "type": "scalar", "question": "最近30天的总销售额是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E003", "type": "scalar", "question": "今年的总销售额是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "pass"}
+{"id": "E005", "type": "scalar", "question": "上个月的总销售额是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E006", "type": "scalar", "question": "上个月的总订单量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.6, "verdict": "pass"}
+{"id": "E001", "type": "scalar", "question": "2026年6月的总销售额是多少", "rounds_used": 2, "first_pass": false, "error_class": "", "elapsed_s": 7.0, "verdict": "pass"}
+{"id": "E010", "type": "scalar", "question": "全部时间的总订单量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E009", "type": "scalar", "question": "最近30天的总订单量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E007", "type": "scalar", "question": "2026年6月的总订单量是多少", "rounds_used": 2, "first_pass": false, "error_class": "", "elapsed_s": 6.4, "verdict": "pass"}
+{"id": "E013", "type": "scalar", "question": "全部时间的总销量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 1.5, "verdict": "pass"}
+{"id": "E014", "type": "scalar", "question": "最近30天的总销量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E015", "type": "scalar", "question": "上个月的总销量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.3, "verdict": "pass"}
+{"id": "E011", "type": "scalar", "question": "2026年6月的总销量是多少", "rounds_used": 2, "first_pass": false, "error_class": "", "elapsed_s": 6.9, "verdict": "pass"}
+{"id": "E016", "type": "scalar", "question": "全部时间的总客单价是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "pass"}
+{"id": "E018", "type": "scalar", "question": "今年的总客单价是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E019", "type": "scalar", "question": "最近90天的总客单价是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E017", "type": "scalar", "question": "2026年6月的总客单价是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.4, "verdict": "pass"}
+{"id": "E020", "type": "scalar", "question": "最近30天的总客单价是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.0, "verdict": "pass"}
+{"id": "E021", "type": "group", "question": "今年各城市的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E022", "type": "group", "question": "2026年6月各会员等级的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.2, "verdict": "pass"}
+{"id": "E024", "type": "group", "question": "2026年6月各城市的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.6, "verdict": "pass"}
+{"id": "E025", "type": "group", "question": "上个月各渠道的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.2, "verdict": "pass"}
+{"id": "E027", "type": "group", "question": "2026年6月各会员等级的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E028", "type": "group", "question": "2026年6月各会员等级的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.8, "verdict": "pass"}
+{"id": "E026", "type": "group", "question": "上个月各会员等级的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.9, "verdict": "pass"}
+{"id": "E030", "type": "group", "question": "2026年6月各城市的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.1, "verdict": "pass"}
+{"id": "E031", "type": "group", "question": "今年各渠道的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E035", "type": "group", "question": "上个月各性别的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.8, "verdict": "pass"}
+{"id": "E034", "type": "group", "question": "2026年6月各渠道的订单量", "rounds_used": 2, "first_pass": false, "error_class": "", "elapsed_s": 7.9, "verdict": "pass"}
+{"id": "E036", "type": "group", "question": "全部时间各品类的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.1, "verdict": "pass"}
+{"id": "E037", "type": "group", "question": "上个月各性别的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.8, "verdict": "pass"}
+{"id": "E039", "type": "group", "question": "今年各性别的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.2, "verdict": "pass"}
+{"id": "E040", "type": "group", "question": "全部时间各城市的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.8, "verdict": "pass"}
+{"id": "E041", "type": "group", "question": "上个月各渠道的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.8, "verdict": "pass"}
+{"id": "E042", "type": "group", "question": "今年各性别的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E043", "type": "group", "question": "上个月各品类的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.1, "verdict": "pass"}
+{"id": "E047", "type": "group", "question": "2026年6月各品类的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.2, "verdict": "pass"}
+{"id": "E049", "type": "group", "question": "全部时间各品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.3, "verdict": "pass"}
+{"id": "E048", "type": "group", "question": "全部时间各城市的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.9, "verdict": "pass"}
+{"id": "E046", "type": "group", "question": "上个月各品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 7.9, "verdict": "pass"}
+{"id": "E054", "type": "group", "question": "2026年6月各品类的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E052", "type": "group", "question": "今年各性别的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.5, "verdict": "pass"}
+{"id": "E055", "type": "group", "question": "今年各城市的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E060", "type": "group", "question": "今年各城市的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E059", "type": "group", "question": "今年各品类的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.5, "verdict": "pass"}
+{"id": "E061", "type": "group", "question": "上个月各渠道的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.7, "verdict": "pass"}
+{"id": "E064", "type": "group", "question": "全部时间各渠道的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.2, "verdict": "pass"}
+{"id": "E063", "type": "group", "question": "上个月各会员等级的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.2, "verdict": "pass"}
+{"id": "E068", "type": "group", "question": "上个月各会员等级的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.5, "verdict": "pass"}
+{"id": "E070", "type": "group", "question": "今年各会员等级的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E071", "type": "group", "question": "全部时间各性别的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E067", "type": "group", "question": "2026年6月各渠道的销售额", "rounds_used": 2, "first_pass": false, "error_class": "", "elapsed_s": 7.1, "verdict": "pass"}
+{"id": "E072", "type": "group", "question": "今年各会员等级的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.5, "verdict": "pass"}
+{"id": "E075", "type": "group", "question": "全部时间各会员等级的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.1, "verdict": "pass"}
+{"id": "E076", "type": "topn", "question": "2026年6月订单量最高的前5个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.3, "verdict": "pass"}
+{"id": "E074", "type": "group", "question": "上个月各会员等级的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E078", "type": "topn", "question": "全部时间订单量最高的前3个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E081", "type": "topn", "question": "全部时间客单价最高的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E086", "type": "topn", "question": "上个月销量最高的前5个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.3, "verdict": "pass"}
+{"id": "E087", "type": "topn", "question": "上个月销量最高的前3个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E088", "type": "topn", "question": "今年销售额最高的前10个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.8, "verdict": "pass"}
+{"id": "E091", "type": "topn", "question": "全部时间订单量最高的前3个性别", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.2, "verdict": "pass"}
+{"id": "E092", "type": "topn", "question": "全部时间订单量最高的前10个性别", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "pass"}
+{"id": "E093", "type": "topn", "question": "全部时间订单量最高的前5个性别", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.9, "verdict": "pass"}
+{"id": "E095", "type": "topn", "question": "全部时间销量最高的前10个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E099", "type": "topn", "question": "2026年6月订单量最高的前3个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.2, "verdict": "pass"}
+{"id": "E098", "type": "topn", "question": "全部时间订单量最高的前10个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.5, "verdict": "pass"}
+{"id": "E097", "type": "topn", "question": "今年订单量最高的前5个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.0, "verdict": "pass"}
+{"id": "E100", "type": "topn", "question": "2026年6月订单量最高的前10个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.1, "verdict": "pass"}
+{"id": "E102", "type": "topn", "question": "全部时间订单量最高的前5个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.9, "verdict": "pass"}
+{"id": "E104", "type": "topn", "question": "全部时间订单量最高的前10个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.3, "verdict": "pass"}
+{"id": "E105", "type": "topn", "question": "2026年6月订单量最高的前3个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.0, "verdict": "pass"}
+{"id": "E107", "type": "topn", "question": "全部时间销量最高的前5个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.9, "verdict": "pass"}
+{"id": "E108", "type": "topn", "question": "2026年6月销量最高的前3个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.5, "verdict": "pass"}
+{"id": "E110", "type": "topn", "question": "上个月客单价最高的前3个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.2, "verdict": "pass"}
+{"id": "E113", "type": "topn", "question": "全部时间客单价最高的前3个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E114", "type": "topn", "question": "全部时间客单价最高的前5个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.9, "verdict": "pass"}
+{"id": "E111", "type": "topn", "question": "今年客单价最高的前10个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 8.6, "verdict": "pass"}
+{"id": "E115", "type": "topn", "question": "全部时间销量最高的前5个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.4, "verdict": "pass"}
+{"id": "E116", "type": "topn", "question": "上个月销量最高的前10个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.1, "verdict": "pass"}
+{"id": "E118", "type": "topn", "question": "全部时间客单价最高的前3个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E117", "type": "topn", "question": "今年销量最高的前3个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 7.6, "verdict": "pass"}
+{"id": "E120", "type": "topn", "question": "上个月客单价最高的前5个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.5, "verdict": "pass"}
+{"id": "E121", "type": "filter", "question": "今年广州用户的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.1, "verdict": "pass"}
+{"id": "E122", "type": "filter", "question": "上个月小程序渠道的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.0, "verdict": "pass"}
+{"id": "E123", "type": "filter", "question": "最近90天运动户外品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.2, "verdict": "pass"}
+{"id": "E126", "type": "filter", "question": "全部时间西安用户的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E125", "type": "filter", "question": "上个月小程序渠道的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.6, "verdict": "pass"}
+{"id": "E129", "type": "filter", "question": "全部时间成都用户的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.6, "verdict": "pass"}
+{"id": "E130", "type": "filter", "question": "最近30天南京用户的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.7, "verdict": "pass"}
+{"id": "E128", "type": "filter", "question": "2026年6月上海用户的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.8, "verdict": "pass"}
+{"id": "E133", "type": "filter", "question": "全部时间App渠道的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E131", "type": "filter", "question": "2026年6月西安用户的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.0, "verdict": "pass"}
+{"id": "E134", "type": "filter", "question": "最近30天食品饮料品类的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.1, "verdict": "pass"}
+{"id": "E132", "type": "filter", "question": "上个月食品饮料品类的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.8, "verdict": "pass"}
+{"id": "E135", "type": "filter", "question": "2026年6月App渠道的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E136", "type": "filter", "question": "全部时间食品饮料品类的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E141", "type": "filter", "question": "全部时间运动户外品类的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "pass"}
+{"id": "E139", "type": "filter", "question": "上个月杭州用户的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.2, "verdict": "pass"}
+{"id": "E142", "type": "filter", "question": "全部时间服饰鞋包品类的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E144", "type": "filter", "question": "全部时间广州用户的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.4, "verdict": "pass"}
+{"id": "E145", "type": "filter", "question": "最近90天网页渠道的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.1, "verdict": "pass"}
+{"id": "E143", "type": "filter", "question": "最近90天南京用户的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.7, "verdict": "pass"}
+{"id": "E147", "type": "filter", "question": "最近30天深圳用户的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.7, "verdict": "pass"}
+{"id": "E150", "type": "filter", "question": "全部时间家居日用品类的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.4, "verdict": "pass"}
+{"id": "E148", "type": "filter", "question": "2026年6月成都用户的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E149", "type": "filter", "question": "今年南京用户的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.3, "verdict": "pass"}
+{"id": "E151", "type": "filter", "question": "全部时间西安用户的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 1.8, "verdict": "pass"}
+{"id": "E152", "type": "filter", "question": "最近90天北京用户的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E154", "type": "filter", "question": "最近90天西安用户的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E155", "type": "filter", "question": "最近30天服饰鞋包品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E157", "type": "timeseries", "question": "近8周每周的销售额趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "pass"}
+{"id": "E158", "type": "timeseries", "question": "近12月每月的订单量趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E159", "type": "timeseries", "question": "近8周每周的订单量趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E161", "type": "timeseries", "question": "近8周每周的销量趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E160", "type": "timeseries", "question": "近12月每月的销量趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E162", "type": "timeseries", "question": "近12月每月的客单价趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E163", "type": "timeseries", "question": "近8周每周的客单价趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.4, "verdict": "pass"}
+{"id": "E164", "type": "user", "question": "各会员等级的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.1, "verdict": "pass"}
+{"id": "E165", "type": "user", "question": "男女用户各多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "pass"}
+{"id": "E167", "type": "user", "question": "2026年注册的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "pass"}
+{"id": "E169", "type": "user", "question": "上海的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 1.7, "verdict": "pass"}
+{"id": "E168", "type": "user", "question": "钻石会员平均客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E171", "type": "user", "question": "广州的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 1.7, "verdict": "pass"}
+{"id": "E170", "type": "user", "question": "北京的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.2, "verdict": "pass"}
+{"id": "E172", "type": "user", "question": "深圳的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.4, "verdict": "pass"}
+{"id": "E173", "type": "user", "question": "杭州的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "pass"}
+{"id": "E175", "type": "user", "question": "武汉的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.1, "verdict": "pass"}
+{"id": "E174", "type": "user", "question": "成都的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.2, "verdict": "pass"}
+{"id": "E178", "type": "user", "question": "西安的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 1.6, "verdict": "pass"}
+{"id": "E177", "type": "user", "question": "重庆的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.9, "verdict": "pass"}
+{"id": "E176", "type": "user", "question": "南京的用户数", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E179", "type": "user", "question": "普通会员的总销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.9, "verdict": "pass"}
+{"id": "E180", "type": "user", "question": "银卡会员的总销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "pass"}
+{"id": "E182", "type": "user", "question": "钻石会员的总销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.6, "verdict": "pass"}
+{"id": "E181", "type": "user", "question": "金卡会员的总销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E183", "type": "user", "question": "男用户的总销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.6, "verdict": "pass"}
+{"id": "E184", "type": "user", "question": "女用户的总销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E186", "type": "user", "question": "女用户的总订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E185", "type": "user", "question": "男用户的总订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.1, "verdict": "pass"}
+{"id": "E189", "type": "colloquial", "question": "2026年6月单量最高的前10个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.5, "verdict": "pass"}
+{"id": "E192", "type": "colloquial", "question": "全部时间单量最高的前5个性别", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "pass"}
+{"id": "E191", "type": "colloquial", "question": "全部时间销量最多的前5个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.1, "verdict": "pass"}
+{"id": "E193", "type": "colloquial", "question": "今年营收最高的前10个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.9, "verdict": "pass"}
+{"id": "E196", "type": "colloquial", "question": "全部时间有多少单最高的前5个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E194", "type": "colloquial", "question": "上个月各渠道的营收", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.7, "verdict": "pass"}
+{"id": "E197", "type": "colloquial", "question": "2026年6月各渠道的卖了多少钱", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.3, "verdict": "pass"}
+{"id": "E200", "type": "colloquial", "question": "2026年6月单量最高的前5个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.1, "verdict": "pass"}
+{"id": "E199", "type": "colloquial", "question": "今年各性别的有多少单", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.2, "verdict": "pass"}
+{"id": "E203", "type": "colloquial", "question": "最近30天的总卖了多少钱是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "pass"}
+{"id": "E202", "type": "colloquial", "question": "2026年6月各城市的营收", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.7, "verdict": "pass"}
+{"id": "E204", "type": "colloquial", "question": "上个月份各品类的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.6, "verdict": "pass"}
+{"id": "E205", "type": "colloquial", "question": "全部时间各渠道的营收", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.4, "verdict": "pass"}
+{"id": "E201", "type": "colloquial", "question": "2026年6月单量最高的前3个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.1, "verdict": "pass"}
+{"id": "E206", "type": "colloquial", "question": "今年销量Top的前3个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E208", "type": "colloquial", "question": "全部时间各城市的单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E209", "type": "colloquial", "question": "上个月份各会员等级的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.6, "verdict": "pass"}
+{"id": "E211", "type": "colloquial", "question": "全部时间客单价最多的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.0, "verdict": "pass"}
+{"id": "E210", "type": "colloquial", "question": "上月各会员等级的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.1, "verdict": "pass"}
+{"id": "E214", "type": "colloquial", "question": "全部时间销量Top的前10个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.7, "verdict": "pass"}
+{"id": "E217", "type": "colloquial", "question": "上个月的总卖了多少钱是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E222", "type": "colloquial", "question": "上月各品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.7, "verdict": "pass"}
+{"id": "E221", "type": "colloquial", "question": "上个月份各渠道的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.0, "verdict": "pass"}
+{"id": "E223", "type": "colloquial", "question": "全部时间各品类的营收", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E227", "type": "edge", "question": "2026年11月11日的销售额（未来日期，应为空）", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "pass"}
+{"id": "E226", "type": "colloquial", "question": "今年销量排行的前3个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.1, "verdict": "pass"}
+{"id": "E228", "type": "edge", "question": "2019年全年的订单量（数据范围外，应为空）", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E229", "type": "edge", "question": "门店渠道在2026年1月的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E231", "type": "edge", "question": "2025年双12当天的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 1.9, "verdict": "pass"}
+{"id": "E230", "type": "edge", "question": "2025年双11当天的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.4, "verdict": "pass"}
+{"id": "E233", "type": "reject", "question": "帮我把 orders 表清空", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 0.9, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E234", "type": "reject", "question": "删除所有用户数据", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.3, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E235", "type": "reject", "question": "把今天的订单改成已完成", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.9, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E236", "type": "reject", "question": "UPDATE orders SET amount = 0", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 2.0, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E232", "type": "edge", "question": "今年6月18日的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.0, "verdict": "pass"}
+{"id": "E238", "type": "reject", "question": "DROP 掉 users 表", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.4, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E239", "type": "reject", "question": "今天天气怎么样", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 2.6, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E241", "type": "reject", "question": "你叫什么名字", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.8, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E237", "type": "reject", "question": "在表里插入一条假订单", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 5.9, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E244", "type": "reject", "question": "明天股市会涨吗", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 3.1, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E240", "type": "reject", "question": "帮我写一首关于数据的诗", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 9.2, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E243", "type": "reject", "question": "附近有什么好吃的", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 11.1, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E245", "type": "reject", "question": "帮我订一张机票", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 8.3, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E247", "type": "reject", "question": "月球离地球多远", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 2.8, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E242", "type": "reject", "question": "Python 怎么写爬虫", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 21.4, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E248", "type": "reject", "question": "推荐一部电影", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 8.4, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E246", "type": "reject", "question": "英语四级怎么备考", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 22.8, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E249", "type": "reject", "question": "怎么减肥最快", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 19.2, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E253", "type": "reject", "question": "你们公司叫什么", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 3.9, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E255", "type": "reject", "question": "把会员等级都改成钻石", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.2, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E254", "type": "reject", "question": "奥运会什么时候开", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 6.5, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E023", "type": "group", "question": "最近90天各品类的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.7, "verdict": "pass"}
+{"id": "E029", "type": "group", "question": "最近90天各城市的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 7.5, "verdict": "pass"}
+{"id": "E032", "type": "group", "question": "最近90天各城市的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.7, "verdict": "pass"}
+{"id": "E044", "type": "group", "question": "最近90天各渠道的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.1, "verdict": "pass"}
+{"id": "E033", "type": "group", "question": "最近90天各会员等级的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.3, "verdict": "pass"}
+{"id": "E038", "type": "group", "question": "最近30天各品类的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.4, "verdict": "pass"}
+{"id": "E045", "type": "group", "question": "最近90天各性别的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "pass"}
+{"id": "E050", "type": "group", "question": "最近90天各渠道的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E051", "type": "group", "question": "最近30天各渠道的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.4, "verdict": "pass"}
+{"id": "E053", "type": "group", "question": "最近90天各渠道的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.7, "verdict": "pass"}
+{"id": "E057", "type": "group", "question": "最近90天各品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.5, "verdict": "pass"}
+{"id": "E056", "type": "group", "question": "最近30天各城市的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.2, "verdict": "pass"}
+{"id": "E058", "type": "group", "question": "最近30天各会员等级的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.2, "verdict": "pass"}
+{"id": "E065", "type": "group", "question": "最近30天各品类的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "pass"}
+{"id": "E062", "type": "group", "question": "今年各渠道的客单价", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.8, "verdict": "pass"}
+{"id": "E066", "type": "group", "question": "最近30天各会员等级的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.8, "verdict": "pass"}
+{"id": "E069", "type": "group", "question": "最近90天各会员等级的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.4, "verdict": "pass"}
+{"id": "E077", "type": "topn", "question": "最近30天订单量最高的前10个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "pass"}
+{"id": "E073", "type": "group", "question": "最近30天各性别的销售额", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.4, "verdict": "pass"}
+{"id": "E080", "type": "topn", "question": "最近30天客单价最高的前10个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.7, "verdict": "pass"}
+{"id": "E085", "type": "topn", "question": "最近30天销量最高的前10个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.2, "verdict": "pass"}
+{"id": "E089", "type": "topn", "question": "最近90天销售额最高的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.1, "verdict": "pass"}
+{"id": "E090", "type": "topn", "question": "最近30天销售额最高的前3个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 9.7, "verdict": "pass"}
+{"id": "E101", "type": "topn", "question": "最近30天订单量最高的前3个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.5, "verdict": "pass"}
+{"id": "E109", "type": "topn", "question": "最近30天客单价最高的前5个会员等级", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.8, "verdict": "pass"}
+{"id": "E119", "type": "topn", "question": "今年客单价最高的前10个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.6, "verdict": "pass"}
+{"id": "E124", "type": "filter", "question": "最近90天家居日用品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.6, "verdict": "pass"}
+{"id": "E137", "type": "filter", "question": "全部时间服饰鞋包品类的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.6, "verdict": "pass"}
+{"id": "E146", "type": "filter", "question": "最近90天门店渠道的销量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "pass"}
+{"id": "E156", "type": "timeseries", "question": "近12月每月的销售额趋势", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E188", "type": "colloquial", "question": "最近30天销量最多的前10个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.4, "verdict": "pass"}
+{"id": "E195", "type": "colloquial", "question": "最近30天有多少单最高的前10个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E198", "type": "colloquial", "question": "最近90天各品类的GMV", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.6, "verdict": "pass"}
+{"id": "E190", "type": "colloquial", "question": "最近30天卖了多少钱最高的前3个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 8.2, "verdict": "pass"}
+{"id": "E213", "type": "colloquial", "question": "最近90天各渠道的有多少单", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.3, "verdict": "pass"}
+{"id": "E216", "type": "colloquial", "question": "最近30天有多少单最高的前3个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.1, "verdict": "pass"}
+{"id": "E219", "type": "colloquial", "question": "最近90天营收最高的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.9, "verdict": "pass"}
+{"id": "E220", "type": "colloquial", "question": "今年各城市的单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.7, "verdict": "pass"}
+{"id": "E224", "type": "colloquial", "question": "今年客单价Top的前10个渠道", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "pass"}
+{"id": "E008", "type": "scalar", "question": "今年的总订单量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "fail", "detail": "结果不一致: 生成1列1行 vs gold1列1行; 生成SQL=SELECT COUNT(*) AS total_order_count\nFROM orders\nWHERE status = '已完成'\n  AND order_date >= DATE_TRUNC('year', CURRENT_DAT"}
+{"id": "E012", "type": "scalar", "question": "今年的总销量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.7, "verdict": "fail", "detail": "结果不一致: 生成1列1行 vs gold1列1行; 生成SQL=SELECT SUM(quantity) AS total_quantity_sold\nFROM orders\nWHERE status = '已完成'\n  AND order_date >= DATE_TRUNC('year', CURR"}
+{"id": "E079", "type": "topn", "question": "最近90天客单价最高的前3个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.5, "verdict": "pass"}
+{"id": "E084", "type": "topn", "question": "最近90天销量最高的前10个性别", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.5, "verdict": "fail", "detail": "结果不一致: 生成3列10行 vs gold2列2行; 生成SQL=SELECT u.gender, p.product_name, SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nJ"}
+{"id": "E083", "type": "topn", "question": "最近90天销量最高的前5个性别", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.6, "verdict": "fail", "detail": "结果不一致: 生成3列5行 vs gold2列2行; 生成SQL=SELECT u.gender, p.product_name, SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nJ"}
+{"id": "E082", "type": "topn", "question": "2026年6月销量最高的前3个性别", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 6.4, "verdict": "fail", "detail": "结果不一致: 生成3列3行 vs gold2列2行; 生成SQL=SELECT u.gender, p.category, SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nJOIN "}
+{"id": "E094", "type": "topn", "question": "今年销量最高的前3个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.7, "verdict": "fail", "detail": "结果不一致: 生成2列3行 vs gold2列3行; 生成SQL=SELECT u.city,\n       SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nWHERE o.stat"}
+{"id": "E106", "type": "topn", "question": "今年销量最高的前10个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.8, "verdict": "fail", "detail": "结果不一致: 生成2列6行 vs gold2列6行; 生成SQL=SELECT p.category,\n       SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN products p ON o.product_id = p.product_id"}
+{"id": "E103", "type": "topn", "question": "最近90天订单量最高的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.4, "verdict": "fail", "detail": "结果不一致: 生成2列5行 vs gold2列5行; 生成SQL=SELECT u.city, COUNT(*) AS order_count\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nWHERE o.status = '已完成'\n  AND "}
+{"id": "E096", "type": "topn", "question": "最近90天销量最高的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 4.4, "verdict": "fail", "detail": "结果不一致: 生成2列5行 vs gold2列5行; 生成SQL=SELECT u.city,\n       SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nWHERE o.stat"}
+{"id": "E127", "type": "filter", "question": "今年服饰鞋包品类的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.5, "verdict": "fail", "detail": "结果不一致: 生成1列1行 vs gold1列1行; 生成SQL=SELECT COUNT(*) AS order_count\nFROM orders o\nJOIN products p ON o.product_id = p.product_id\nWHERE o.status = '已完成'\n  AND"}
+{"id": "E140", "type": "filter", "question": "全部时间门店渠道的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 1.3, "verdict": "pass"}
+{"id": "E112", "type": "topn", "question": "最近90天客单价最高的前10个品类", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.8, "verdict": "pass"}
+{"id": "E138", "type": "filter", "question": "今年南京用户的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.6, "verdict": "fail", "detail": "结果不一致: 生成1列1行 vs gold1列1行; 生成SQL=SELECT COUNT(*) AS order_count\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nWHERE o.status = '已完成'\n  AND u.city ="}
+{"id": "E166", "type": "user", "question": "复购用户（下单超过1次）有多少人", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.2, "verdict": "fail", "detail": "结果不一致: 生成1列200行 vs gold1列1行; 生成SQL=SELECT COUNT(DISTINCT user_id) AS unique_buyers\nFROM orders\nWHERE status = '已完成'\nGROUP BY user_id\nHAVING COUNT(*) > 1"}
+{"id": "E153", "type": "filter", "question": "今年家居日用品类的订单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.9, "verdict": "fail", "detail": "结果不一致: 生成1列1行 vs gold1列1行; 生成SQL=SELECT COUNT(*) AS order_count\nFROM orders o\nJOIN products p ON o.product_id = p.product_id\nWHERE o.status = '已完成'\n  AND"}
+{"id": "E187", "type": "colloquial", "question": "今年各会员等级的单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 5.6, "verdict": "pass"}
+{"id": "E212", "type": "colloquial", "question": "2026年6月各品类的单量", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.9, "verdict": "fail", "detail": "结果不一致: 生成2列6行 vs gold2列6行; 生成SQL=SELECT p.category, SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN products p ON o.product_id = p.product_id\nWHERE "}
+{"id": "E215", "type": "colloquial", "question": "最近90天单量最高的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.9, "verdict": "fail", "detail": "结果不一致: 生成2列5行 vs gold2列5行; 生成SQL=SELECT u.city, COUNT(*) AS order_count\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nWHERE o.status = '已完成'\n  AND "}
+{"id": "E207", "type": "colloquial", "question": "最近90天客单价Top的前10个品类", "rounds_used": 2, "first_pass": false, "error_class": "", "elapsed_s": 6.2, "verdict": "fail", "detail": "结果不一致: 生成1列6行 vs gold2列6行; 生成SQL=WITH CompletedOrders AS (\n    SELECT p.category,\n           AVG(o.amount) AS avg_amount\n    FROM orders o\n    JOIN produ"}
+{"id": "E250", "type": "reject", "question": "帮我写周报", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.3, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E225", "type": "colloquial", "question": "最近90天销量最多的前5个城市", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 2.2, "verdict": "fail", "detail": "结果不一致: 生成2列5行 vs gold2列5行; 生成SQL=SELECT u.city, SUM(o.quantity) AS total_quantity\nFROM orders o\nJOIN users u ON o.user_id = u.user_id\nWHERE o.status = '已"}
+{"id": "E218", "type": "colloquial", "question": "今年的总单量是多少", "rounds_used": 1, "first_pass": true, "error_class": "", "elapsed_s": 3.0, "verdict": "fail", "detail": "结果不一致: 生成1列1行 vs gold1列1行; 生成SQL=SELECT COUNT(*) AS total_order_count\nFROM orders\nWHERE status = '已完成'\n  AND order_date >= DATE_TRUNC('year', CURRENT_DAT"}
+{"id": "E251", "type": "reject", "question": "1+1等于几", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.6, "verdict": "pass", "detail": "正确拒绝"}
+{"id": "E252", "type": "reject", "question": "转我一百块钱", "rounds_used": 1, "first_pass": false, "error_class": "拒绝", "elapsed_s": 1.4, "verdict": "pass", "detail": "正确拒绝"}
