@@ -98,6 +98,13 @@ def run_agent(question: str, on_event=None) -> AgentResult:
             result.success = True
             result.columns, result.rows = r.columns, r.rows
             return result
+
+        # 安全拒绝必须熔断循环——实测若继续走修复回填，模型会"绕道"：
+        # 生成一条 SELECT 'Table has been dropped' 假装删表成功（badcase 6）
+        if trace.error_class == "拒绝":
+            result.final_error = ("该请求要求删除/修改数据。AskData 是只读分析系统，"
+                                  "已拒绝执行——不会真的动库，也不会假装执行。")
+            return result
         last_sql, last_error = sql, r.error
 
     result.final_error = last_error

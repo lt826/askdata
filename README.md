@@ -32,7 +32,7 @@ DuckDB（单文件列存）· LangGraph + LangChain · FastAPI + SSE · Vue3 + E
 - [x] 第 2 步 · NL→SQL→执行 单链路跑通（验收 3/4：歧义列名失败案例正好留给第 3 步）
 - [x] 第 3 步 · 沙箱修复循环（灵魂）——错误分类回喂重生成,实测歧义列名1轮修复;口径速查补 COUNT(DISTINCT)/TopN聚合规范后语义跑偏消除
 - [x] 第 4 步 · 呈现层——表格/图型决策+matplotlib代码沙箱渲染(line/bar/pie验收通过),summary接地约束
-- [ ] 第 5 步 · API + 前端
+- [x] 第 5 步 · API + 前端——SSE(round/summary/chart/table事件)+Vue3对话界面,修复循环轨迹实时可视化;修Vue3响应性坑;案例6:拒绝类错误熔断循环防"假装删表"作弊
 - [ ] 第 6 步 · 执行准确率评测（30~50 题）
 - [ ] 第 7 步 · 观测 + 部署
 - [ ] 第 8 步 · 简历 + 文档

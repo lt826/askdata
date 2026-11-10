@@ -8,3 +8,5 @@ data/datasets/*.csv
 data/datasets/*.parquet
 .pytest_cache/
 .ipynb_checkpoints/
+web/node_modules/
+web/dist/
