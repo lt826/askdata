@@ -29,6 +29,47 @@ from app.db.schema_doc import get_schema_doc
 
 CHART_DIR = Path(__file__).resolve().parents[2] / "data" / "charts"
 
+# ---- 展示层列名翻译：模型起的英文别名 → 中文（图表图例与表头共用）----
+COLUMN_ZH = {
+    # 常见聚合别名
+    "sales": "销售额", "gmv": "GMV", "revenue": "营收", "amount": "金额",
+    "order_count": "订单量", "orders": "订单量", "order_num": "订单量",
+    "user_count": "用户数", "users": "用户数", "cnt": "数量", "count": "数量",
+    "qty": "销量", "quantity": "销量", "aov": "客单价", "avg_amount": "平均金额",
+    "month": "月份", "week": "周", "day": "日期", "date": "日期",
+    # 维度列
+    "channel": "渠道", "city": "城市", "category": "品类", "subcategory": "子类",
+    "gender": "性别", "member_level": "会员等级", "brand": "品牌",
+    "product_name": "商品名", "name": "名称",
+    # 原始表列（SELECT * / 明细题）
+    "order_id": "订单号", "user_id": "用户ID", "product_id": "商品ID",
+    "order_date": "下单日期", "register_date": "注册日期", "status": "状态",
+    "unit_price": "单价", "cost_price": "成本价", "sales_percentage": "销售额占比",
+}
+
+
+def zh_cols(columns: list[str]) -> list[str]:
+    """递归+后缀规则翻译；翻不出的原样保留（宁缺毋滥不瞎翻）。"""
+    def one(c: str) -> str:
+        low = str(c).lower()
+        if low in COLUMN_ZH:
+            return COLUMN_ZH[low]
+        if str(c) in COLUMN_ZH:
+            return COLUMN_ZH[str(c)]
+        if low.endswith(("_percentage", "_pct", "_ratio")):
+            return one(low.rsplit("_", 1)[0]) + "占比"
+        if low.endswith("_count"):
+            return one(low.rsplit("_", 1)[0]) + "数"
+        if low.endswith("_rate"):
+            return one(low.rsplit("_", 1)[0]) + "率"
+        if low.startswith("total_"):
+            return "总" + one(low[6:])
+        if low.startswith("avg_"):
+            return "平均" + one(low[4:])
+        return str(c)
+
+    return [one(c) for c in columns]
+
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
@@ -72,9 +113,9 @@ def ask_stream(body: AskIn):
                 events.put(("chart", {
                     "chart_type": p.chart_type,
                     "url": "/api/charts/" + Path(p.chart_path).name,
-                    "columns": r.columns,
+                    "columns": zh_cols(r.columns),
                     "rows": r.rows[:200]}))
-            events.put(("table", {"columns": r.columns,
+            events.put(("table", {"columns": zh_cols(r.columns),
                                   "rows": r.rows[:100],
                                   "total": len(r.rows)}))
         except Exception as exc:  # noqa: BLE001 —— SSE 必须把异常传到前端
