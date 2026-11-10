@@ -1,8 +1,8 @@
-# DataPilot · ChatBI 数据分析 Agent
+# AskData · 问数
 
-> 中文问数据，自动出 SQL、自动修错、自动出图 —— 让业务人员零 SQL 做数据分析
+> 中文问数据，自动出 SQL、自动修错、自动出图 —— ChatBI 数据分析 Agent，让业务人员零 SQL 做分析
 
-**与 [FitPilot](https://github.com/lt826/fit-pilot)（RAG 知识问答）互补**：FitPilot 解决"知识问题"（检索 + 生成），DataPilot 解决"计算问题"（代码生成 + 执行验证）。
+**与 [FitPilot](https://github.com/lt826/fit-pilot)（RAG 知识问答）互补**：FitPilot 解决"知识问题"（检索 + 生成），AskData 解决"计算问题"（代码生成 + 执行验证）。
 
 ## 六层架构
 
@@ -42,4 +42,6 @@ DuckDB（单文件列存）· LangGraph + LangChain · FastAPI + SSE · Vue3 + E
 ```bash
 uv sync
 cp .env.example .env   # 填 ZHIPU_API_KEY
-``
+uv run scripts/gen_dataset.py   # 生成合成数据集
+uv run scripts/build_db.py      # 建 DuckDB 库
+```
