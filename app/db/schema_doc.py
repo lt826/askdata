@@ -57,6 +57,9 @@ SCHEMA_DOC = """## 数据库：sales（电商订单分析库，近一年数据�
 - 客单价 = AVG(orders.amount)（同上只算已完成）
 - 复购用户 = 按 user_id 分组 HAVING COUNT(*)>1
 - 毛利 = SUM(o.amount - p.cost_price * o.quantity)（join 后）
+- **用户数/人数 = COUNT(DISTINCT user_id)**——join 后每用户多行，直接 COUNT 会算成订单数
+- **TopN 问题必须先 GROUP BY 聚合到目标维度，再 ORDER BY + LIMIT N**——返回逐条明细是错误答案
+- "品类"默认指 category（一级）；问子类才用 subcategory
 """
 
 
