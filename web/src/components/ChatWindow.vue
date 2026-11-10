@@ -24,7 +24,8 @@ const send = async (text) => {
   // 必须是 reactive：普通对象 push 进 reactive 数组后，改原对象不触发渲染（Vue3 经典坑）
   const assistant = reactive({
     role: 'assistant', streaming: true,
-    rounds: [], summary: '', chartUrl: '',
+    rounds: [], summary: '',
+    chartType: '', chartUrl: '', chartCols: [], chartRows: [],
     columns: [], tableRows: [], total: 0, error: '',
   })
   messages.value.push(assistant)
@@ -35,7 +36,15 @@ const send = async (text) => {
     await streamAsk(q, {
       round: (d) => { assistant.rounds.push(d); touch() },
       summary: (d) => { assistant.summary = d.text; touch() },
-      chart: (d) => { assistant.chartUrl = d.url; touch() },
+      chart: (d) => {
+        assistant.chartType = d.chart_type
+        assistant.chartUrl = d.url || ''
+        if (d.columns?.length && d.rows?.length) {
+          assistant.chartCols = d.columns
+          assistant.chartRows = d.rows
+        }
+        touch()
+      },
       table: (d) => {
         assistant.columns = d.columns
         // el-table 的 prop 必须是字符串键

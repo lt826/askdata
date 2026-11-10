@@ -1,6 +1,7 @@
 <script setup>
-// 助手气泡：修复循环轨迹 → 结论 → 图 → 表格
+// 助手气泡：修复循环轨迹 → 结论 → ECharts 图（PNG 兜底）→ 表格
 import ProcessTrace from './ProcessTrace.vue'
+import EChartBox from './EChartBox.vue'
 
 defineProps({
   msg: { type: Object, required: true },
@@ -16,34 +17,41 @@ defineProps({
 
         <div v-if="msg.summary" class="summary">{{ msg.summary }}</div>
 
+        <EChartBox
+          v-if="msg.chartType && msg.chartCols.length"
+          :chart-type="msg.chartType"
+          :columns="msg.chartCols"
+          :rows="msg.chartRows"
+        />
         <el-image
-          v-if="msg.chartUrl"
+          v-else-if="msg.chartUrl"
           :src="msg.chartUrl"
           :preview-src-list="[msg.chartUrl]"
           fit="contain"
           class="chart"
         />
 
-        <el-table
-          v-if="msg.columns && msg.columns.length"
-          :data="msg.tableRows"
-          size="small"
-          border
-          max-height="360"
-          class="table"
-        >
-          <el-table-column
-            v-for="c in msg.columns"
-            :key="c"
-            :prop="String(c)"
-            :label="String(c)"
-            min-width="90"
+        <div v-if="msg.columns && msg.columns.length" class="table-card">
+          <el-table
+            :data="msg.tableRows"
+            size="small"
+            stripe
+            max-height="360"
           >
-            <template #default="{ row }">
-              {{ row[c] }}
-            </template>
-          </el-table-column>
-        </el-table>
+            <el-table-column
+              v-for="(c, i) in msg.columns"
+              :key="c"
+              :prop="String(c)"
+              :label="String(c)"
+              :min-width="i === 0 ? 110 : 100"
+              :align="i === 0 ? 'left' : 'right'"
+            >
+              <template #default="{ row }">
+                {{ row[c] }}
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
         <div v-if="msg.total > msg.tableRows?.length" class="more">
           仅展示前 {{ msg.tableRows.length }} 行，共 {{ msg.total }} 行
         </div>
@@ -107,8 +115,19 @@ defineProps({
   margin-bottom: 8px;
   background: #fff;
 }
-.table {
+.table-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
   margin-bottom: 4px;
+}
+.table-card :deep(thead th) {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+}
+.table-card :deep(.el-table__row:hover td) {
+  background: #eff6ff !important;
 }
 .more {
   font-size: 11px;

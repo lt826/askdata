@@ -68,9 +68,12 @@ def ask_stream(body: AskIn):
             p = present(r.question, r.columns, r.rows)
             events.put(("summary", {"text": p.summary}))
             if p.kind == "chart" and p.chart_path:
+                # 优先前端 ECharts 交互渲染；matplotlib PNG 作为兜底/离线报告用
                 events.put(("chart", {
                     "chart_type": p.chart_type,
-                    "url": "/api/charts/" + Path(p.chart_path).name}))
+                    "url": "/api/charts/" + Path(p.chart_path).name,
+                    "columns": r.columns,
+                    "rows": r.rows[:200]}))
             events.put(("table", {"columns": r.columns,
                                   "rows": r.rows[:100],
                                   "total": len(r.rows)}))
@@ -87,7 +90,8 @@ def ask_stream(body: AskIn):
             if item is None:
                 break
             event, data = item
-            yield f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
+            # default=str：结果里的 date 等类型转字符串，否则序列化炸掉整个 SSE 流
+            yield f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False, default=str)}\n\n"
         yield "event: done\ndata: {}\n\n"
 
     return StreamingResponse(gen(), media_type="text/event-stream")
