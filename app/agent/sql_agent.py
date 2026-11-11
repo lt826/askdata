@@ -1,20 +1,22 @@
-"""SQL 修复循环（项目灵魂）：生成 → 执行 → 失败则错误回喂 → 重生成 → ... → 熔断。
+"""SQL 修复循环（项目灵魂）——LangGraph StateGraph 编排版。
 
-对应六层架构第④层。与 FitPilot 的 FC 工具循环同构，但反馈对象从"工具结果"换成
-"执行错误 + 上一版 SQL"——本质是 ReAct 在代码生成上的应用：
-模型看到自己的错误信息，修正再试，而不是人类贴身改 prompt。
+图结构：
+  generate ──> execute ──┬── ok ──────> END
+                          ├── 拒绝 ───> END（安全拒绝熔断，final_error 已置）
+                          ├── 轮数尽 ─> END（final_error 已置）
+                          └── else ──> fix ──> execute（错误回喂重生成）
 
-错误分类（供观测与展示；宽分类，不追求精确）：
-- 拒绝    guard 拦截（写操作/多语句）——通常不该重试同类
-- 语法    Parser Error
-- 列名/表 Binder/Catalog Error（歧义、不存在）——修复成功率最高的一类
-- 超时    性能问题，提示加过滤
-熔断：超过 max_fix_rounds 轮仍失败 → 如实报告，不编造结果。
+与手写循环等价（行为、RoundTrace、AgentResult 完全一致），对外 run_agent 接口不变
+——server / 评测脚本零改动，回归评测可直接对比。
+为什么上 LangGraph：条件路由/熔断/重试这类"控制流即图"，声明式边取代嵌套循环，
+后续加节点（如呈现、审核）只是 add_node + add_edge。
 """
 
-import re
 from dataclasses import dataclass, field
 from datetime import date
+from typing import TypedDict
+
+from langgraph.graph import END, StateGraph
 
 from app.agent.sql_gen import SYSTEM_TEMPLATE, extract_sql
 from app.core.config import get_settings
@@ -62,50 +64,102 @@ class AgentResult:
 
     @property
     def fix_rounds_used(self) -> int:
-        return max(0, len(self.rounds) - 1)  # 首轮是生成不是修复
+        return max(0, len(self.rounds) - 1)
+
+
+class AgentState(TypedDict, total=False):
+    question: str
+    messages: list
+    traces: list          # 每轮 RoundTrace（评测的 rounds/首过率指标来源）
+    round_no: int
+    sql: str
+    ok: bool
+    error: str
+    columns: list
+    rows: list
+    success: bool
+    final_error: str
+
+
+def _build_graph(on_event=None):
+    s = get_settings()
+
+    def system_msg() -> dict:
+        return {"role": "system",
+                "content": SYSTEM_TEMPLATE.format(today=date.today().isoformat(),
+                                                  schema=get_schema_doc())}
+
+    def node_generate(state: AgentState) -> AgentState:
+        sql = extract_sql(chat([system_msg(),
+                                {"role": "user", "content": f"问：{state['question']}"}],
+                               temperature=0))
+        return {"messages": [system_msg(), {"role": "user", "content": f"问：{state['question']}"}],
+                "sql": sql, "round_no": 1}
+
+    def node_fix(state: AgentState) -> AgentState:
+        messages = list(state["messages"])
+        messages.append({"role": "assistant", "content": f"```sql\n{state['sql']}\n```"})
+        messages.append({"role": "user", "content": (
+            f"你生成的 SQL 执行失败：\n{state['error']}\n\n{FIX_HINT}\n"
+            f"请修正后重新输出 SQL（只输出 ```sql 代码块）。")})
+        sql = extract_sql(chat(messages, temperature=0))
+        return {"messages": messages, "sql": sql, "round_no": state["round_no"] + 1}
+
+    def node_execute(state: AgentState) -> AgentState:
+        r = run_sql(state["sql"])
+        cls = classify_error(r.error) if not r.ok else ""
+        trace = RoundTrace(state["round_no"], state["sql"], r.ok,
+                           r.error if not r.ok else "", cls, r.elapsed_ms)
+        if on_event:
+            on_event({"type": "round", **vars(trace)})
+        out: AgentState = {"ok": r.ok, "error": r.error if not r.ok else "",
+                           "traces": state.get("traces", []) + [trace]}
+        if r.ok:
+            out.update(success=True, columns=r.columns, rows=r.rows)
+            return out
+        # 安全拒绝必须熔断循环——实测若继续走修复回填，模型会"绕道"：
+        # 生成一条 SELECT 'Table has been dropped' 假装删表成功（badcase 6）
+        if cls == "拒绝":
+            out["final_error"] = ("该请求要求删除/修改数据。AskData 是只读分析系统，"
+                                  "已拒绝执行——不会真的动库，也不会假装执行。")
+            return out
+        if state["round_no"] >= s.max_fix_rounds + 1:
+            out["final_error"] = r.error
+        return out
+
+    def route_after_execute(state: AgentState) -> str:
+        if state.get("success"):
+            return "done"
+        if state.get("final_error"):       # 拒绝熔断 或 轮数耗尽
+            return "stop"
+        return "fix"
+
+    builder = StateGraph(AgentState)
+    builder.add_node("generate", node_generate)
+    builder.add_node("execute", node_execute)
+    builder.add_node("fix", node_fix)
+    builder.set_entry_point("generate")
+    builder.add_edge("generate", "execute")
+    builder.add_edge("fix", "execute")
+    builder.add_conditional_edges(
+        "execute", route_after_execute,
+        {"done": END, "stop": END, "fix": "fix"})
+    return builder.compile()
+
+
+# 评测/前端复用同一张编译图；带自定义 on_event 时按需重编译（compile 开销毫秒级）
+_GRAPH = _build_graph()
 
 
 def run_agent(question: str, on_event=None) -> AgentResult:
-    """on_event(evt: dict) 供 SSE/CLI 实时展示每轮执行过程。"""
-    s = get_settings()
-    messages = [
-        {"role": "system",
-         "content": SYSTEM_TEMPLATE.format(today=date.today().isoformat(),
-                                           schema=get_schema_doc())},
-        {"role": "user", "content": f"问：{question}"},
-    ]
-    result = AgentResult(question=question, success=False)
-    last_sql, last_error = "", ""
+    graph = _build_graph(on_event) if on_event else _GRAPH
+    final = graph.invoke({"question": question})
 
-    for round_no in range(1, s.max_fix_rounds + 2):  # 1 轮生成 + max 轮修复
-        if round_no == 1:
-            sql = extract_sql(chat(messages, temperature=0))
-        else:
-            messages.append({"role": "assistant", "content": f"```sql\n{last_sql}\n```"})
-            messages.append({"role": "user", "content": (
-                f"你生成的 SQL 执行失败：\n{last_error}\n\n{FIX_HINT}\n"
-                f"请修正后重新输出 SQL（只输出 ```sql 代码块）。")})
-            sql = extract_sql(chat(messages, temperature=0))
-
-        r = run_sql(sql)
-        trace = RoundTrace(round_no, sql, r.ok, r.error,
-                           classify_error(r.error) if not r.ok else "", r.elapsed_ms)
-        result.rounds.append(trace)
-        if on_event:
-            on_event({"type": "round", **vars(trace)})
-
-        if r.ok:
-            result.success = True
-            result.columns, result.rows = r.columns, r.rows
-            return result
-
-        # 安全拒绝必须熔断循环——实测若继续走修复回填，模型会"绕道"：
-        # 生成一条 SELECT 'Table has been dropped' 假装删表成功（badcase 6）
-        if trace.error_class == "拒绝":
-            result.final_error = ("该请求要求删除/修改数据。AskData 是只读分析系统，"
-                                  "已拒绝执行——不会真的动库，也不会假装执行。")
-            return result
-        last_sql, last_error = sql, r.error
-
-    result.final_error = last_error
+    result = AgentResult(question=question, success=bool(final.get("success")))
+    result.rounds = final.get("traces", [])
+    if result.success:
+        result.columns = final.get("columns", [])
+        result.rows = final.get("rows", [])
+    else:
+        result.final_error = final.get("final_error") or final.get("error") or "未知错误"
     return result
