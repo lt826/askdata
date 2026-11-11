@@ -44,7 +44,7 @@ DuckDB（单文件列存）· LangGraph + LangChain · FastAPI + SSE · Vue3 + E
 - [x] 第 4 步 · 呈现层——表格/图型决策+matplotlib代码沙箱渲染(line/bar/pie验收通过),summary接地约束
 - [x] 第 5 步 · API + 前端——SSE(round/summary/chart/table事件)+Vue3对话界面,修复循环轨迹实时可视化;修Vue3响应性坑;案例6:拒绝类错误熔断循环防"假装删表"作弊
 - [ ] 第 6 步 · 执行准确率评测（30~50 题）
-- [ ] 第 7 步 · 观测 + 部署
+- [x] 第 7 步(进行中)——JWT认证(口令换token,24h,401拦截)与滑动窗口限流(登录10/min,问答20/min,429+Retry-After)已上线;可复用组件app/core/security.py
 - [ ] 第 8 步 · 简历 + 文档
 
 ## 快速开始（待第 2 步后补全）

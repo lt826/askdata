@@ -17,7 +17,7 @@ import threading
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -25,6 +25,8 @@ from pydantic import BaseModel
 
 from app.agent.present import present
 from app.agent.sql_agent import run_agent
+from app.core.config import get_settings
+from app.core.security import create_token, limiter, verify_token
 from app.db.schema_doc import get_schema_doc
 
 CHART_DIR = Path(__file__).resolve().parents[2] / "data" / "charts"
@@ -92,10 +94,25 @@ class AskIn(BaseModel):
     question: str
 
 
+class LoginIn(BaseModel):
+    password: str
+
+
+@app.post("/api/login")
+def login(body: LoginIn):
+    """口令换 JWT。登录本身也限流（防爆破）。"""
+    limiter.limit("login", 10)
+    if body.password != get_settings().admin_password:
+        raise HTTPException(status_code=401, detail="口令错误")
+    return {"token": create_token("admin"), "expires_in": get_settings().jwt_expire_hours * 3600}
+
+
 @app.post("/api/ask")
-def ask_stream(body: AskIn):
+def ask_stream(body: AskIn, user: str = Depends(verify_token)):
     if not body.question.strip():
         raise HTTPException(status_code=400, detail="question 不能为空")
+    # 限流按用户计：每次问答都要花 LLM token，这是配额的第一道闸
+    limiter.limit(f"ask:{user}", get_settings().rate_limit_per_min)
 
     events: queue.Queue = queue.Queue()
 
@@ -139,6 +156,6 @@ def ask_stream(body: AskIn):
 
 
 @app.get("/api/schema")
-def schema():
+def schema(_: str = Depends(verify_token)):
     """数据字典原文（前端弹窗展示用）。"""
     return {"schema_doc": get_schema_doc()}
