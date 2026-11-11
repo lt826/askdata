@@ -6,6 +6,7 @@ dependencies = [
     "duckdb>=2.0.0",
     "fastapi>=0.162.2",
     "langchain>=1.4.9",
+    "langfuse>=5.2.0",
     "langgraph>=1.2.20",
     "matplotlib>=3.11.2",
     "openai>=3.48.0",

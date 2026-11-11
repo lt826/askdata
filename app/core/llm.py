@@ -5,6 +5,7 @@ from functools import lru_cache
 from openai import OpenAI
 
 from app.core.config import get_settings
+from app.core.observability import note_generation_usage, obs
 
 
 @lru_cache
@@ -15,14 +16,19 @@ def get_llm_client() -> OpenAI:
     return OpenAI(api_key=s.zhipu_api_key, base_url=s.zhipu_base_url)
 
 
+@obs("llm_chat", as_type="generation", capture_input=False)
 def chat(messages: list[dict], model: str | None = None,
          temperature: float = 0.2, **kwargs) -> str:
     """一次性返回完整文本。SQL 生成/修复循环用（结构化任务，低温度）。"""
     client = get_llm_client()
+    m = model or get_settings().chat_model
     resp = client.chat.completions.create(
-        model=model or get_settings().chat_model,
+        model=m,
         messages=messages,
         temperature=temperature,
         **kwargs,
     )
+    usage = getattr(resp, "usage", None)
+    note_generation_usage(m, getattr(usage, "prompt_tokens", None),
+                          getattr(usage, "completion_tokens", None))
     return (resp.choices[0].message.content or "").strip()

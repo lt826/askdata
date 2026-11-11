@@ -13,7 +13,7 @@
 ④ 沙箱执行+修复循环  报错分类(语法/列名/逻辑)→错误+表结构回喂重生成→N轮熔断 ★项目灵魂
 ⑤ 呈现层            模型判断表格/图型 → matplotlib 代码 → 沙箱渲染
 ⑥ 安全护栏          SQL 白名单拦 DELETE/UPDATE/DROP、LIMIT 强制、超时熔断
-横切：LangFuse 观测（修复轮数=核心质量指标）+ 执行准确率评测
+横切：LangFuse 观测（ask_turn 根 trace：轮数/修复轮数/错误分类；token 用量与延迟分解在 llm_chat/sql_execute/present 子观测）+ 执行准确率评测
 ```
 
 ## 核心指标（255 题评测集，glm-4-flash）
@@ -45,7 +45,7 @@ DuckDB（单文件列存）· LangGraph（StateGraph 编排修复循环）· Fas
 - [x] 第 4 步 · 呈现层——表格/图型决策+matplotlib代码沙箱渲染(line/bar/pie验收通过),summary接地约束
 - [x] 第 5 步 · API + 前端——SSE(round/summary/chart/table事件)+Vue3对话界面,修复循环轨迹实时可视化;修Vue3响应性坑;案例6:拒绝类错误熔断循环防"假装删表"作弊
 - [ ] 第 6 步 · 执行准确率评测（30~50 题）
-- [x] 第 7 步(进行中)·LangGraph 编排重构完成(对外接口不变,全量回归 96.1%)——JWT认证+滑动窗口限流已上线(可复用security.py);LangGraph编排重构完成(回归96.1%)
+- [x] 第 7 步 · JWT+限流 / LangGraph 编排（回归 96.1%）/ LangFuse 观测（ask_turn→llm_chat/sql_execute/present 全树，修复轮数=看板指标）；部署见下——JWT认证+滑动窗口限流已上线(可复用security.py);LangGraph编排重构完成(回归96.1%)
 - [ ] 第 8 步 · 简历 + 文档
 
 ## 快速开始（待第 2 步后补全）

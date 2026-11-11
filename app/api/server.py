@@ -26,6 +26,7 @@ from pydantic import BaseModel
 from app.agent.present import present
 from app.agent.sql_agent import run_agent
 from app.core.config import get_settings
+from app.core.observability import finish_turn, shutdown_client, turn_trace
 from app.core.security import create_token, limiter, verify_token
 from app.db.schema_doc import get_schema_doc
 
@@ -76,6 +77,7 @@ def zh_cols(columns: list[str]) -> list[str]:
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     yield
+    shutdown_client()  # 退出前冲刷 LangFuse 缓冲，保住最后几条 trace
 
 
 app = FastAPI(title="AskData API", version="0.1.0", lifespan=lifespan)
@@ -117,28 +119,33 @@ def ask_stream(body: AskIn, user: str = Depends(verify_token)):
     events: queue.Queue = queue.Queue()
 
     def worker() -> None:
-        try:
-            r = run_agent(body.question,
-                          on_event=lambda e: events.put(("round", e)))
-            if not r.success:
-                events.put(("error", {"message": r.final_error}))
-                return
-            p = present(r.question, r.columns, r.rows)
-            events.put(("summary", {"text": p.summary}))
-            if p.kind == "chart" and p.chart_path:
-                # 优先前端 ECharts 交互渲染；matplotlib PNG 作为兜底/离线报告用
-                events.put(("chart", {
-                    "chart_type": p.chart_type,
-                    "url": "/api/charts/" + Path(p.chart_path).name,
-                    "columns": zh_cols(r.columns),
-                    "rows": r.rows[:200]}))
-            events.put(("table", {"columns": zh_cols(r.columns),
-                                  "rows": r.rows[:100],
-                                  "total": len(r.rows)}))
-        except Exception as exc:  # noqa: BLE001 —— SSE 必须把异常传到前端
-            events.put(("error", {"message": f"{exc.__class__.__name__}: {exc}"}))
-        finally:
-            events.put(None)
+        # 根 trace 必须开在工作线程内：OTel 上下文不跨线程，
+        # 线程内开根后 llm_chat/sql_execute/present 自动挂到同一棵树
+        with turn_trace(body.question) as root:
+            try:
+                r = run_agent(body.question,
+                              on_event=lambda e: events.put(("round", e)))
+                finish_turn(root, r.success, len(r.rounds),
+                            r.rounds[-1].error_class if r.rounds and not r.success else "")
+                if not r.success:
+                    events.put(("error", {"message": r.final_error}))
+                    return
+                p = present(r.question, r.columns, r.rows)
+                events.put(("summary", {"text": p.summary}))
+                if p.kind == "chart" and p.chart_path:
+                    # 优先前端 ECharts 交互渲染；matplotlib PNG 作为兜底/离线报告用
+                    events.put(("chart", {
+                        "chart_type": p.chart_type,
+                        "url": "/api/charts/" + Path(p.chart_path).name,
+                        "columns": zh_cols(r.columns),
+                        "rows": r.rows[:200]}))
+                events.put(("table", {"columns": zh_cols(r.columns),
+                                      "rows": r.rows[:100],
+                                      "total": len(r.rows)}))
+            except Exception as exc:  # noqa: BLE001 —— SSE 必须把异常传到前端
+                events.put(("error", {"message": f"{exc.__class__.__name__}: {exc}"}))
+            finally:
+                events.put(None)  # 结束哨兵
 
     threading.Thread(target=worker, daemon=True).start()
 

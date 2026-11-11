@@ -14,6 +14,7 @@ import pandas as pd
 
 from app.agent.sandbox import run_chart_code
 from app.core.llm import chat
+from app.core.observability import note_metadata, obs
 
 CHART_DIR = Path(__file__).resolve().parents[2] / "data" / "charts"
 
@@ -62,6 +63,7 @@ def _parse_json(text: str) -> dict:
         return {"kind": "table", "summary": "", "code": None}
 
 
+@obs("present", capture_input=False)
 def present(question: str, columns: list[str], rows: list[tuple]) -> PresentResult:
     df = pd.DataFrame(rows, columns=columns)
     prompt = DECIDE_TEMPLATE.format(
@@ -75,6 +77,7 @@ def present(question: str, columns: list[str], rows: list[tuple]) -> PresentResu
             {"role": "assistant", "content": "（刚才的输出不是合法 JSON）"},
             {"role": "user", "content": "请严格只输出一个 JSON 对象，不要任何围栏或解释。"},
         ], temperature=0))
+    note_metadata(kind=decision.get("kind"), chart_type=decision.get("chart_type"))
     result = PresentResult(
         kind=decision.get("kind") or "table",
         chart_type=decision.get("chart_type") or "",

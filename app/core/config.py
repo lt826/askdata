@@ -25,6 +25,11 @@ class Settings(BaseSettings):
     # ---- Agent ----
     max_fix_rounds: int = 3  # SQL 修复循环熔断：报错回喂重生成的最大轮数
 
+    # ---- LangFuse 观测（未配 Key 时全链路自动直通） ----
+    langfuse_public_key: str = ""
+    langfuse_secret_key: str = ""
+    langfuse_host: str = ""
+
     # ---- 认证与限流 ----
     admin_password: str = "askdata123"       # 登录口令（生产改强口令，只进 .env）
     jwt_secret: str = "change-me-in-.env"    # HS256 签名密钥

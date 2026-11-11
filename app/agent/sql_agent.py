@@ -21,6 +21,7 @@ from langgraph.graph import END, StateGraph
 from app.agent.sql_gen import SYSTEM_TEMPLATE, extract_sql
 from app.core.config import get_settings
 from app.core.llm import chat
+from app.core.observability import note_metadata, obs
 from app.db.executor import run_sql
 from app.db.schema_doc import get_schema_doc
 
@@ -105,11 +106,14 @@ def _build_graph(on_event=None):
         sql = extract_sql(chat(messages, temperature=0))
         return {"messages": messages, "sql": sql, "round_no": state["round_no"] + 1}
 
+    @obs("sql_execute", capture_input=False)
     def node_execute(state: AgentState) -> AgentState:
         r = run_sql(state["sql"])
         cls = classify_error(r.error) if not r.ok else ""
         trace = RoundTrace(state["round_no"], state["sql"], r.ok,
                            r.error if not r.ok else "", cls, r.elapsed_ms)
+        note_metadata(round_no=state["round_no"], ok=r.ok, error_class=cls,
+                      elapsed_ms=r.elapsed_ms)
         if on_event:
             on_event({"type": "round", **vars(trace)})
         out: AgentState = {"ok": r.ok, "error": r.error if not r.ok else "",
