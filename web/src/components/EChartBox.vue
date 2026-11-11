@@ -13,7 +13,7 @@ const props = defineProps({
 const el = ref(null)
 let chart = null
 
-const PALETTE = ['#2563eb', '#7c3aed', '#0ea5e9', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6', '#64748b']
+const PALETTE = ['#ffd400', '#000000', '#ff4b3e', '#00b3a4', '#2962ff', '#8b4513', '#7d00ff', '#546e7a']
 
 function isNum(v) {
   return typeof v === 'number' || (typeof v === 'string' && v !== '' && !Number.isNaN(Number(v)))
@@ -51,7 +51,7 @@ function buildOption() {
         type: 'pie',
         radius: ['42%', '68%'],
         center: ['50%', '44%'],
-        itemStyle: { borderColor: '#fff', borderWidth: 2, borderRadius: 6 },
+        itemStyle: { borderColor: '#000', borderWidth: 2, borderRadius: 0 },
         label: { formatter: '{b}\n{d}%' },
         data: props.rows
           .filter((r) => isNum(r[1]))
@@ -70,11 +70,11 @@ function buildOption() {
       type: 'category',
       data: cats,
       axisLabel: { rotate: cats.length > 8 ? 38 : 0, fontSize: 11 },
-      axisLine: { lineStyle: { color: '#cbd5e1' } },
+      axisLine: { lineStyle: { color: '#000', width: 2 } },
     },
     yAxis: {
       type: 'value',
-      splitLine: { lineStyle: { color: '#f1f5f9' } },
+      splitLine: { lineStyle: { color: '#eee' } },
       axisLabel: {
         fontSize: 11,
         formatter: (v) => (v >= 1e8 ? v / 1e8 + '亿' : v >= 1e4 ? v / 1e4 + '万' : v),
@@ -112,9 +112,9 @@ watch(() => [props.chartType, props.rows], render)
   width: 100%;
   height: 340px;
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 6px 4px 0;
-  margin-bottom: 10px;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  padding: 8px 4px 0;
+  margin-bottom: 12px;
 }
 </style>

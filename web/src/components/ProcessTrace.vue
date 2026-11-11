@@ -24,34 +24,40 @@ const shortSql = (s) => (s.length > 64 ? s.slice(0, 64) + '…' : s.replace(/\s+
 
 <style scoped>
 .trace {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-bottom: 8px;
+  background: #f2f2ee;
+  border: 2px solid #000;
+  border-left: 6px solid #000;
+  padding: 10px 12px;
+  margin-bottom: 10px;
   font-size: 12px;
+  font-family: Consolas, 'Microsoft YaHei', monospace;
 }
 .trace-title {
-  color: #64748b;
-  margin-bottom: 6px;
+  color: #000;
+  margin-bottom: 8px;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 .round {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .no {
-  color: #94a3b8;
-  font-weight: 600;
+  color: #000;
+  font-weight: 900;
+  background: #ffe800;
+  border: 1px solid #000;
+  padding: 0 4px;
 }
 .sql {
   font-family: Consolas, monospace;
-  color: #334155;
-  background: #f1f5f9;
+  color: #000;
+  background: #fff;
+  border: 1px solid #000;
   padding: 1px 6px;
-  border-radius: 4px;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,8 +65,12 @@ const shortSql = (s) => (s.length > 64 ? s.slice(0, 64) + '…' : s.replace(/\s+
 }
 .err {
   width: 100%;
-  color: #dc2626;
+  color: #fff;
+  background: #ff4b3e;
+  border: 1px solid #000;
   font-size: 11px;
-  padding-left: 26px;
+  padding: 1px 6px;
+  margin-left: 18px;
+  display: inline-block;
 }
 </style>

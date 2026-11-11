@@ -73,9 +73,9 @@ onMounted(scrollDown)
   <div class="chat">
     <div ref="listEl" class="list">
       <div class="welcome">
-        <div class="w-title">你好，我是 AskData · 问数 👋</div>
+        <div class="w-title">用中文问数据，<br /><span class="hl">SQL 我来写</span>。</div>
         <div class="w-sub">
-          直接用中文问数据，我生成 SQL → 沙箱执行 → 出错自动修复 → 出表格和图。
+          生成 SQL → 沙箱执行 → 出错自动修复 → 出表格和图。<br />
           试试左侧的示例问题。
         </div>
       </div>
@@ -103,6 +103,7 @@ onMounted(scrollDown)
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: #fff;
 }
 .list {
   flex: 1;
@@ -110,24 +111,35 @@ onMounted(scrollDown)
   padding: 18px 22px;
 }
 .welcome {
-  text-align: center;
-  padding: 36px 0 20px;
+  text-align: left;
+  padding: 40px 0 24px;
 }
 .w-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 30px;
+  font-weight: 900;
+  color: #000;
+  line-height: 1.3;
+}
+.w-title .hl {
+  background: #ffe800;
+  padding: 0 8px;
+  border: 3px solid #000;
+  display: inline-block;
+  box-shadow: 5px 5px 0 #000;
 }
 .w-sub {
-  color: #64748b;
+  color: #000;
   font-size: 13px;
-  margin-top: 8px;
+  margin-top: 14px;
+  font-family: Consolas, 'Microsoft YaHei', monospace;
+  border-left: 5px solid #000;
+  padding-left: 10px;
 }
 .input-bar {
   display: flex;
-  gap: 10px;
-  padding: 12px 16px;
-  border-top: 1px solid #e2e8f0;
+  gap: 12px;
+  padding: 14px 16px;
+  border-top: 3px solid #000;
   background: #fff;
   align-items: flex-end;
 }

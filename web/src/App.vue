@@ -130,10 +130,78 @@ const showSchema = async () => {
 </template>
 
 <style>
+/* ---- 粗野主义全局基调：纸白/纯黑/电光黄，3px 边框 + 硬投影，零圆角零渐变 ---- */
 body {
   margin: 0;
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: #f1f5f9;
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  background: #fff;
+  color: #000;
+}
+:root {
+  --el-color-primary: #111;
+  --el-border-radius-base: 0px;
+}
+.el-button {
+  border: 2px solid #000 !important;
+  border-radius: 0 !important;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 #000;
+  transition: none;
+}
+.el-button:not(.is-text):active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 #000;
+}
+.el-button--primary {
+  background: #ffe800 !important;
+  color: #000 !important;
+}
+.el-button--primary.is-text {
+  background: transparent !important;
+}
+.el-button.is-text {
+  border: none !important;
+  box-shadow: none !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.el-input__wrapper, .el-textarea__inner {
+  border-radius: 0 !important;
+  border: 2px solid #000 !important;
+  box-shadow: none !important;
+  font-family: Consolas, 'Microsoft YaHei', monospace;
+}
+.el-dialog {
+  border-radius: 0 !important;
+  border: 3px solid #000;
+  box-shadow: 8px 8px 0 #000;
+}
+.el-tag {
+  border-radius: 0 !important;
+  border: 2px solid #000 !important;
+  font-family: Consolas, monospace;
+  font-weight: 700;
+  background: #fff !important;
+  color: #000 !important;
+}
+.el-alert {
+  border-radius: 0 !important;
+  border: 2px solid #000 !important;
+  background: #ff4b3e !important;
+  color: #000 !important;
+  font-weight: 700;
+}
+.el-table {
+  --el-table-border-color: #000;
+  --el-table-header-bg-color: #000;
+  --el-table-header-text-color: #fff;
+  --el-table-row-hover-bg-color: #ffe800;
+}
+.el-table th.el-table__cell {
+  font-family: Consolas, monospace;
+}
+.el-table .el-table__cell {
+  border: 1px solid #000 !important;
 }
 </style>
 
@@ -144,9 +212,10 @@ body {
   flex-direction: column;
 }
 .topbar {
-  height: 54px;
-  background: #fff;
-  border-bottom: 1px solid #e2e8f0;
+  height: 58px;
+  background: #000;
+  color: #fff;
+  border-bottom: 3px solid #000;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -154,63 +223,80 @@ body {
 }
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
 }
 .logo {
   font-size: 22px;
+  background: #ffe800;
+  color: #000;
+  border: 2px solid #fff;
+  padding: 1px 6px;
+  font-weight: 900;
 }
 .name {
-  font-size: 17px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #2563eb, #7c3aed);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 .sub {
   font-size: 12px;
-  color: #94a3b8;
+  color: #ffe800;
+  font-family: Consolas, monospace;
+  border: 1px solid #ffe800;
+  padding: 1px 6px;
 }
 .main-row {
   flex: 1;
   display: flex;
   min-height: 0;
+  background: #fff;
 }
 .aside {
-  width: 230px;
+  width: 240px;
   background: #fff;
-  border-right: 1px solid #e2e8f0;
-  padding: 16px 14px;
+  border-right: 3px solid #000;
+  padding: 18px 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 .panel-title {
   font-size: 12px;
-  color: #94a3b8;
-  margin-bottom: 2px;
+  color: #000;
+  margin: 8px 0 2px;
+  font-family: Consolas, monospace;
+  font-weight: 700;
+  border-bottom: 3px solid #000;
+  padding-bottom: 4px;
 }
 .ex-btn {
   justify-content: flex-start;
+  font-family: Consolas, 'Microsoft YaHei', monospace;
 }
 .meta {
   font-size: 13px;
-  color: #334155;
-  line-height: 2;
+  color: #000;
+  line-height: 2.1;
+  font-family: Consolas, 'Microsoft YaHei', monospace;
 }
 .meta-sub {
   font-size: 11px;
-  color: #94a3b8;
-  margin-top: 4px;
+  color: #000;
+  margin-top: 6px;
+  background: #ffe800;
+  border: 2px solid #000;
+  padding: 2px 6px;
+  display: inline-block;
+  font-weight: 700;
 }
 .chat-area {
   flex: 1;
   min-width: 0;
   background: #fff;
-  margin: 12px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  margin: 14px;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #000;
   overflow: hidden;
 }
 .schema {
@@ -218,9 +304,9 @@ body {
   font-size: 12px;
   line-height: 1.7;
   font-family: Consolas, 'Microsoft YaHei', monospace;
-  background: #f8fafc;
+  background: #fff;
+  border: 2px solid #000;
   padding: 12px;
-  border-radius: 8px;
   max-height: 65vh;
   overflow-y: auto;
 }
@@ -229,36 +315,40 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(160deg, #eff6ff, #eef2ff);
+  background: repeating-linear-gradient(45deg, #fff 0 24px, #f2f2ee 24px 48px);
 }
 .login-card {
-  width: 320px;
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  width: 340px;
+  background: #ffe800;
+  border: 3px solid #000;
+  box-shadow: 10px 10px 0 #000;
   padding: 34px 30px 30px;
   text-align: center;
-  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.08);
 }
 .login-logo {
   font-size: 38px;
+  border: 2px solid #000;
+  display: inline-block;
+  padding: 4px 10px;
+  background: #fff;
 }
 .login-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 6px;
-  background: linear-gradient(90deg, #2563eb, #7c3aed);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: 22px;
+  font-weight: 900;
+  margin-top: 12px;
+  letter-spacing: 1px;
 }
 .login-sub {
   font-size: 12px;
-  color: #94a3b8;
+  color: #000;
   margin: 4px 0 22px;
+  font-family: Consolas, monospace;
+  font-weight: 700;
 }
 .login-btn {
   width: 100%;
   margin-top: 14px;
+  background: #000 !important;
+  color: #ffe800 !important;
 }
 </style>
