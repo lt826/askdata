@@ -62,7 +62,17 @@ WHERE status = '已完成'
 
 
 def extract_sql(text: str) -> str:
-    """从模型回复里扒 SQL：优先 ```sql 围栏，退化到裸文本。"""
+    """从模型回复中提取纯 SQL 文本（生成链路的"解析容错层"）。
+
+    模型返回的几乎总是带 ```sql 围栏的 Markdown，直接当 SQL 执行必报语法错。
+    解析顺序：
+      1. 优先匹配 ```sql ... ``` 围栏，取围栏内的内容
+      2. 没有围栏时，假定整段回复就是 SQL（退化兜底）
+      3. 去掉首尾空白和结尾分号（duckdb 单语句不需要分号）
+
+    参数: text 模型的完整回复文本
+    返回:  可直接交给执行器的单条 SQL 字符串
+    """
     m = re.search(r"```sql\s*(.+?)```", text, re.S | re.I)
     sql = m.group(1) if m else text.strip()
     # 去掉可能的尾部分号后再规范：单语句保留一个分号都不影响 duckdb，直接 strip
@@ -70,6 +80,16 @@ def extract_sql(text: str) -> str:
 
 
 def generate_sql(question: str) -> str:
+    """把一句中文问题变成一条 DuckDB SQL（generate 节点的内核）。
+
+    组装四件套发模型（temperature=0 保证可复现）：
+      system = 生成规则 + 今天日期 + Schema 白话层全文 + 2 条 few-shot
+      user   = 用户原问题
+    模型返回的围栏文本经 extract_sql 扒壳后返回。
+
+    参数: question 用户的自然语言问题
+    返回:  一条 SQL 字符串（未执行；对错由后续 execute 节点裁决）
+    """
     messages = [
         {"role": "system",
          "content": SYSTEM_TEMPLATE.format(today=date.today().isoformat(),

@@ -35,7 +35,18 @@ class ExecResult:
 
 
 def _guard(sql: str) -> str | None:
-    """返回 None 表示通过，否则返回给模型看的错误说明。"""
+    """SQL 安检（护栏第 1 层）：拦截非只读语句，返回"模型可读"的拒绝理由。
+
+    三项检查，任一不过即拒绝：
+      1. 首词必须是 select / with —— 拦 DROP/INSERT/UPDATE 等一切非查询
+         （with 是放行 CTE 子查询）
+      2. 禁写关键字正则扫描 —— 拦"SELECT 1; DROP TABLE"这种藏在中间的写操作
+      3. 多分号拒绝 —— 只允许单条语句，防连环注入
+
+    参数: sql 待检查的 SQL
+    返回:  None=通过；字符串=拒绝原因（格式刻意写成模型可读，
+           因为它会被 fix 节点回喂给模型当修正依据）
+    """
     first = sql.lstrip("( \n").split(None, 1)[0].lower() if sql.strip() else ""
     if first not in ("select", "with"):
         return (f"[SQL被拒绝] 只允许 SELECT 查询，当前语句以 '{first}' 开头。"
@@ -50,12 +61,29 @@ def _guard(sql: str) -> str | None:
 
 
 def _auto_limit(sql: str) -> str:
+    """LIMIT 兜底（护栏第 3 层）：没写 LIMIT 的查询自动包一层 LIMIT 200。
+
+    防两种事故：用户要"所有订单"时 10 万行打爆前端渲染、打爆呈现层
+    LLM 的上下文。只兜"模型忘了写"的情况——SQL 自带 LIMIT 则尊重原意
+    （用户明确要 10000 行就给 10000 行，由下游各出口再分层截断）。
+    """
     if re.search(r"\blimit\s+\d+", sql, re.I):
         return sql
     return f"SELECT * FROM ({sql}) AS _auto_limited LIMIT {AUTO_LIMIT}"
 
 
 def run_sql(sql: str) -> ExecResult:
+    """执行一条 SQL，全程四层防护（execute 节点的内核）。
+
+    流程：_guard 安检 → _auto_limit 包 LIMIT → read_only 连接（护栏第 2 层，
+    引擎级物理只读，白名单被绕过也写不进库）→ 工作线程执行 → join 超时
+    15s 则 conn.interrupt() 掐断（护栏第 4 层，Python 线程杀不掉但 DuckDB
+    提供中断接口）。
+
+    参数: sql 单条 SELECT（已过安检或即将过）
+    返回:  ExecResult{ok, columns, rows, row_count, elapsed_ms, error}
+           —— 错误同样格式化为模型可读文本，供修复循环回喂
+    """
     err = _guard(sql)
     if err:
         return ExecResult(ok=False, sql=sql, error=err)

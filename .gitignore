@@ -10,3 +10,4 @@ data/datasets/*.parquet
 .ipynb_checkpoints/
 web/node_modules/
 web/dist/
+.idea/

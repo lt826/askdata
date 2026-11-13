@@ -10,6 +10,12 @@ from app.core.observability import note_generation_usage, obs
 
 @lru_cache
 def get_llm_client() -> OpenAI:
+    """LLM 客户端单例：OpenAI 兼容协议直连智谱。
+
+    全项目所有模型调用（SQL 生成/修复/呈现决策）共用这一个客户端和
+    同一条通道；缺 Key 时立刻抛错（fail-fast，不带病运行）。
+    @lru_cache 保证只初始化一次。
+    """
     s = get_settings()
     if not s.zhipu_api_key:
         raise RuntimeError("缺少 ZHIPU_API_KEY：请复制 .env.example 为 .env 并填入")

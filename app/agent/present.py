@@ -54,6 +54,12 @@ class PresentResult:
 
 
 def _parse_json(text: str) -> dict:
+    """从模型回复中提取决策 JSON（与 extract_sql 同一设计思想：解析容错）。
+
+    模型可能加 ```json 围栏或附带解释文字，直接 json.loads 必炸。
+    用贪心正则抓第一个 { 到最后一个 } 之间的内容再解析；抓不到或解析
+    失败都返回"表格+空结论"的安全默认值——呈现决策失败不阻断主流程。
+    """
     m = re.search(r"\{.*\}", text, re.S)
     if not m:
         return {"kind": "table", "summary": "", "code": None}
@@ -65,6 +71,17 @@ def _parse_json(text: str) -> dict:
 
 @obs("present", capture_input=False)
 def present(question: str, columns: list[str], rows: list[tuple]) -> PresentResult:
+    """呈现层：决定答案长什么样（出表格还是图、什么图、中文结论、画图代码）。
+
+    只多调一次 LLM，输入刻意收窄（问题+列名+行数+前 12 行预览——防大结果
+    打爆上下文），要求模型一次返回四合一 JSON。失败链按轻重处理：
+      JSON 没解析出来 → 带反馈重问一次
+      图渲染失败     → 错误回喂重画一次 → 仍败则 kind 降级为 table
+    （呈现是次要交付物，最多给一次重试，不像 SQL 修复给三轮。）
+
+    参数: question 用户问题；columns/rows 已执行成功的查询结果
+    返回:  PresentResult{kind, chart_type, summary, chart_path, chart_error}
+    """
     df = pd.DataFrame(rows, columns=columns)
     prompt = DECIDE_TEMPLATE.format(
         question=question, columns=columns, n=len(rows),

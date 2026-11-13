@@ -2,9 +2,9 @@
 
 图结构：
   generate ──> execute ──┬── ok ──────> END
-                          ├── 拒绝 ───> END（安全拒绝熔断，final_error 已置）
-                          ├── 轮数尽 ─> END（final_error 已置）
-                          └── else ──> fix ──> execute（错误回喂重生成）
+                         ├── 拒绝 ───> END（安全拒绝熔断，final_error 已置）
+                         ├── 轮数尽 ─> END（final_error 已置）
+                         └── else ──> fix ──> execute（错误回喂重生成）
 
 与手写循环等价（行为、RoundTrace、AgentResult 完全一致），对外 run_agent 接口不变
 ——server / 评测脚本零改动，回归评测可直接对比。
@@ -33,6 +33,14 @@ FIX_HINT = """常见修法：
 
 
 def classify_error(error: str) -> str:
+    """把执行错误粗分为五类，供路由决策与观测统计使用。
+
+    分类→用途的映射：
+      拒绝    → 路由据此熔断修复循环（badcase 6：拒绝后重试会被模型"绕道"）
+      语法/列名/表/超时 → 可修复类，进 fix 节点；FIX_HINT 四条与之对应
+      其他    → 兜底类，同样进修复循环
+    注意这是宽分类（关键词匹配），不求精确，够路由用即可。
+    """
     if error.startswith("[SQL被拒绝]"):
         return "拒绝"
     if "Parser" in error:
@@ -91,6 +99,11 @@ def _build_graph(on_event=None):
                                                   schema=get_schema_doc())}
 
     def node_generate(state: AgentState) -> AgentState:
+        """图节点①生成：问题 → 第一版 SQL。
+
+        组装四件套（规则+今天日期+Schema白话+few-shot）调一次 LLM，
+        返回黑板增量：messages（完整对话现场，fix 节点要用）、sql、round_no=1。
+        """
         sql = extract_sql(chat([system_msg(),
                                 {"role": "user", "content": f"问：{state['question']}"}],
                                temperature=0))
@@ -98,6 +111,12 @@ def _build_graph(on_event=None):
                 "sql": sql, "round_no": 1}
 
     def node_fix(state: AgentState) -> AgentState:
+        """图节点③修复：看着报错改作业（修复循环的核心，全手写无框架魔法）。
+
+        在原对话现场追加两条消息——assistant 回填上一版 SQL（模型要知道
+        自己在改谁）+ user 写入报错原文与 FIX_HINT 对症提示——再调一次
+        LLM。返回：messages（追加后）、sql（覆盖成修正版）、round_no+1。
+        """
         messages = list(state["messages"])
         messages.append({"role": "assistant", "content": f"```sql\n{state['sql']}\n```"})
         messages.append({"role": "user", "content": (
@@ -108,6 +127,13 @@ def _build_graph(on_event=None):
 
     @obs("sql_execute", capture_input=False)
     def node_execute(state: AgentState) -> AgentState:
+        """图节点②执行：过四层护栏跑 SQL，按三种剧本写黑板。
+
+        剧本A 成功   → 写 ok/success/columns/rows，路由见 success 走 done
+        剧本B 可修复 → 只写 ok/error（两个暗号都不设，留给 fix）
+        剧本C 拒绝/弹尽 → 额外写 final_error，路由据此熔断出图
+        traces 每次累加一条（评测的首过率/修复轮数指标来源）。
+        """
         r = run_sql(state["sql"])
         cls = classify_error(r.error) if not r.ok else ""
         trace = RoundTrace(state["round_no"], state["sql"], r.ok,
@@ -132,6 +158,12 @@ def _build_graph(on_event=None):
         return out
 
     def route_after_execute(state: AgentState) -> str:
+        """条件边的路由函数（纯函数，只读黑板返回下一站）。
+
+        三个判断对应三种命运：success 有值→done（成功出图）；
+        final_error 有值→stop（拒绝熔断或轮数耗尽）；两者皆无→fix
+        （报错可修，进修复节点）。
+        """
         if state.get("success"):
             return "done"
         if state.get("final_error"):       # 拒绝熔断 或 轮数耗尽
@@ -156,6 +188,16 @@ _GRAPH = _build_graph()
 
 
 def run_agent(question: str, on_event=None) -> AgentResult:
+    """对外唯一入口：一句话进，执行结果+全过程轨迹出。
+
+    流程：invoke 问题进图 → 引擎按边走节点直到 END → 读黑板翻译成
+    AgentResult（rounds 即每轮轨迹，fix_rounds=len-1 是核心质量指标）。
+    on_event 不为 None 时按需重编译图（节点是闭包要捕获回调，编译毫秒级），
+    供 SSE 实时推送每轮执行过程。
+
+    参数: question 用户问题；on_event 可选回调，每轮执行后被调用
+    返回:  AgentResult{success, rounds, columns, rows, final_error}
+    """
     graph = _build_graph(on_event) if on_event else _GRAPH
     final = graph.invoke({"question": question})
 
