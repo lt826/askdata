@@ -77,17 +77,27 @@ class AgentResult:
 
 
 class AgentState(TypedDict, total=False):
-    question: str
-    messages: list
-    traces: list          # 每轮 RoundTrace（评测的 rounds/首过率指标来源）
-    round_no: int
-    sql: str
-    ok: bool
-    error: str
-    columns: list
-    rows: list
-    success: bool
-    final_error: str
+    """黑板（全图共享状态）。每个字段标注：它是什么、谁写 → 谁读。
+
+    规则：节点 return 什么字段就是改什么字段（部分更新），
+    不 return 的字段原样保留；要历史的字段用追加，要现状的用覆盖。
+    """
+
+    question: str      # 用户原始问题。invoke 入口写入一次，此后全程只读
+    messages: list     # 完整对话现场（system提示+问题+每轮SQL/报错）。
+                       # generate 新建 → fix 追加。fix 的 LLM 上下文就靠它
+    traces: list       # 每轮执行轨迹（RoundTrace 对象）。execute 累加；
+                       # 不参与路由，出图后供评测算首过率/修复轮数、前端画轨迹
+    round_no: int      # 当前第几轮。generate 置 1 → fix 每次 +1。
+                       # execute 据此判断"轮数耗尽"（>= max_fix_rounds+1）
+    sql: str           # 当前版本的 SQL。generate 写第一版 → fix 覆盖成修正版。
+                       # 黑板上永远只有"当前版"，历史在 messages/traces 里
+    ok: bool           # 本轮执行成败。execute 写；路由不直接看它——看暗号
+    error: str         # 本轮执行错误原文（"模型可读"格式）。execute 写 → fix 当教材回喂
+    columns: list      # 查询结果的列名。仅剧本A（成功）时 execute 写 → present/前端用
+    rows: list         # 查询结果的数据行。同上，仅成功时写入
+    success: bool      # 暗号①"考完了，过"——execute 成功时写；路由见它走 done
+    final_error: str   # 暗号②"别修了，结案"——拒绝熔断或轮数耗尽时写；路由见它走 stop
 
 
 def _build_graph(on_event=None):
