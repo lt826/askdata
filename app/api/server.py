@@ -172,3 +172,18 @@ def ask_stream(body: AskIn, user: str = Depends(verify_token)):
 def schema(_: str = Depends(verify_token)):
     """数据字典原文（前端弹窗展示用）。"""
     return {"schema_doc": get_schema_doc()}
+
+# ---------------- 生产模式：同源托管前端构建产物 ----------------
+# 开发期前后端分端口（5175/8001，Vite 代理）；生产把 web/dist 挂到根路径，
+# 单 uvicorn 进程同时服务页面与 API（与 FitPilot 生产部署同款方案）。
+# 静态页面本身无需登录（登录页要能加载）；数据安全由 /api/* 的 JWT 把守。
+# 必须放在所有路由之后：挂载在 "/" 的 StaticFiles 会吞掉后续未匹配路径。
+from pathlib import Path  # noqa: E402
+
+from fastapi.staticfiles import StaticFiles  # noqa: E402
+
+_DIST = Path(__file__).resolve().parents[2] / "web" / "dist"
+if _DIST.is_dir():
+    app.mount("/", StaticFiles(directory=str(_DIST), html=True), name="frontend")
+else:
+    print("[提示] 未找到 web/dist，当前为纯 API 模式（前端请用 npm run dev）")
